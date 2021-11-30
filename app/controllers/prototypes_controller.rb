@@ -11,24 +11,24 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.new
   end
 
+  def create
+    @prototype = Prototype.new(prototype_params)
+   if @prototype.save
+     redirect_to root_path
+   else
+     render :new
+   end
+  end
+
   def show
     @comment = Comment.new
     @comments = @prototype.comments
   end
 
-   def create
-         @prototype = Prototype.new(prototype_params)
-     if @prototype.save
-       redirect_to prototypes_path
-     else
-       render :new
-     end
-   end
+  def edit
+  end
 
-   def edit
-   end
-
-   def update
+  def update
     if @prototype.update(prototype_params)
       redirect_to prototype_path(@prototype)
     else
